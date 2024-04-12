@@ -1,68 +1,132 @@
-import java.sql.Date;
-import java.sql.SQLException;
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class health_monitor_APP {
-    private static health_info_DAO healthInfoDAO = new health_info_DAO();
-    private static med_remind_manager medRemindManager = new med_remind_manager();
     private static doctor_portal_DAO doctorPortalDAO = new doctor_portal_DAO();
-    private static recommend_system recommendSystem = new recommend_system();
+
     
     public static void main(String[] args) {
-        // Create health data for a patient
-        health_info healthData = new health_info(1, 1, 70.5, 65.0, 170.0, 25, 8000, 80, "2021-10-01");
-        
-        // Insert health data into the database
-        healthInfoDAO.createHealthInfo(healthData);
-        
-        // Retrieve health data from the database based on ID
-        health_info retrievedHealthData = healthInfoDAO.getHealthInfoByID(1);
-        System.out.println("Retrieved Health Data: " + retrievedHealthData);
-        
-        // Retrieve health data from the database based on patient ID and date
-        List<health_info> healthInfoList = healthInfoDAO.getHealthInfoByPatientId("2021-10-01");
-        System.out.println("Health Data List: " + healthInfoList);
-        
-        // Update health data in the database
-        healthData.setWeight(71.0);
-        healthInfoDAO.updateHealthInfo(healthData);
-        
-        // Delete health data from the database based on ID
-        healthInfoDAO.deleteHealthInfo(1);
-        
-        // Retrieve doctor information by ID
-        Doctor doctor = doctorPortalDAO.getDoctorById(1);
-        System.out.println("Doctor Information: " + doctor);
+        while (true) {
+            // Get user input
+            System.out.println("Enter your user ID:");
+            int userId = Integer.parseInt(System.console().readLine());
+            System.out.println("Enter your password:");
+            String password = System.console().readLine();
+            
+            // Get user by ID
+            user user = user_DAO.getUserById(userId);
+            System.out.println(user);
 
-        // Retrieve health information for a patient
-        List<HealthInfo> patientHealthInfo = doctorPortalDAO.getHealthInfoByPatientId(1);
-        System.out.println("Patient Health Information: " + patientHealthInfo);
+            if (user.isAdmin()) {
+                // Get health info by patient id
+                health_info healthInfo = doctorPortalDAO.getHealthInfoByPatientId(1);
+                System.out.println(healthInfo);
+                
+                // Get med remind by patient id
+                List<med_remind> medRemind = doctorPortalDAO.getMedRemindByPatientId(1);
+                for (med_remind medRemindItem : medRemind) {
+                    System.out.println(medRemindItem);
+                }
+            }
 
-        // Retrieve medication reminders for a patient
-        List<MedRemind> patientMedReminders = doctorPortalDAO.getMedRemindByPatientId(1);
-        System.out.println("Patient Medication Reminders: " + patientMedReminders);
-
-        // Add a new health information entry
-        HealthInfo newHealthInfo = new HealthInfo(1, 70.5, 65.0, 170.0, 25, 8000, 80, Date.valueOf("2021-10-01"));
-        doctorPortalDAO.addHealthInfo(newHealthInfo);
-
-        // Add a new medication reminder
-        MedRemind newMedRemind = new MedRemind(1, "Medication Name", "Take 1 pill daily", Date.valueOf("2021-10-01"), Date.valueOf("2021-10-31"));
-        doctorPortalDAO.addMedRemind(newMedRemind);
-
-        // Update an existing health information entry
-        HealthInfo updatedHealthInfo = new HealthInfo(1, 71.0, 65.0, 170.0, 25, 8000, 80, Date.valueOf("2021-10-01"));
-        doctorPortalDAO.updateHealthInfo(updatedHealthInfo);
-
-        // Update an existing medication reminder
-        MedRemind updatedMedRemind = new MedRemind(1, "Updated Medication Name", "Take 1 pill daily", Date.valueOf("2021-10-01"), Date.valueOf("2021-10-31"));
-        doctorPortalDAO.updateMedRemind(updatedMedRemind);
-
-        // Delete a health information entry
-        doctorPortalDAO.deleteHealthInfo(1);
-
-        // Delete a medication reminder
-        doctorPortalDAO.deleteMedRemind(1);
+            if (!user.isAdmin()) {
+                // Create a new health_info object
+                health_info healthInfo = new health_info(1, 1, 150.0, 140.0, 5.5, 25, 10000, 70, "2021-10-01");
+                
+                // Create a new med_remind object
+                med_remind medRemind = new med_remind(1, 1, "Ibuprofen", "200mg", "3 times a day", "2021-10-01", "2021-10-10");
+                
+                // Add health info to the database
+                doctorPortalDAO.addHealthInfo(healthInfo);
+                
+                // Add med remind to the database
+                doctorPortalDAO.addMedRemind(medRemind);
+                
+                // Get health info by patient id
+                health_info healthInfoById = doctorPortalDAO.getHealthInfoByPatientId(1);
+                System.out.println(healthInfoById);
+                
+                // Get med remind by patient id
+                List<med_remind> medRemindByPatientId = doctorPortalDAO.getMedRemindByPatientId(1);
+                for (med_remind medRemindItem : medRemindByPatientId) {
+                    System.out.println(medRemindItem);
+                }
+                
+                // Update health info
+                healthInfo.setWeight(160.0);
+                doctorPortalDAO.updateHealthInfo(healthInfo);
+                
+                // Update med remind
+                medRemind.setDosage("400mg");
+                doctorPortalDAO.updateMedRemind(medRemind);
+                
+                // Delete health info
+                doctorPortalDAO.deleteHealthInfo(1);
+                
+                // Delete med remind
+                doctorPortalDAO.deleteMedRemind(1);
+                
+                // Get health info by patient id and date
+                List<health_info> healthInfoByPatientIdAndDate = doctorPortalDAO.getHealthInfoByPatientIdAndDate(1, "2021-10-01");
+                for (health_info healthInfoItem : healthInfoByPatientIdAndDate) {
+                    System.out.println(healthInfoItem);
+                }
+            }
+        }
     }
 }
+
+    //     // Create a new doctor object
+    //     doctor doctor = new doctor(1, "John", "Doe", "doctorjohn@gmail.com", "drjohn", true);
+    //     System.out.println(doctor);
+
+    //     // Get doctor by ID
+    //     doctor doctorById = doctor_portal_DAO.getDoctorById(1);
+    //     System.out.println(doctorById);
+
+    //     // Create a new patient object
+    //     user patient = new user(1, "Jane", "Doe", "jdoe@gmail.com", "janedoe", false);
+    //     System.out.println(patient);
+
+    //     // Create a new health_info object
+    //     health_info healthInfo = new health_info(1, 1, 150.0, 140.0, 5.5, 25, 10000, 70, "2021-10-01");
+        
+    //     // Create a new med_remind object
+    //     med_remind medRemind = new med_remind(1, 1, "Ibuprofen", "200mg", "3 times a day", "2021-10-01", "2021-10-10");
+        
+    //     // Add health info to the database
+    //     doctorPortalDAO.addHealthInfo(healthInfo);
+        
+    //     // Add med remind to the database
+    //     doctorPortalDAO.addMedRemind(medRemind);
+        
+    //     // Get health info by patient id
+    //     health_info healthInfoById = doctorPortalDAO.getHealthInfoByPatientId(1);
+    //     System.out.println(healthInfoById);
+        
+    //     // Get med remind by patient id
+    //     List<med_remind> medRemindByPatientId = doctorPortalDAO.getMedRemindByPatientId(1);
+    //     for (med_remind medRemindItem : medRemindByPatientId) {
+    //         System.out.println(medRemindItem);
+    //     }
+        
+    //     // Update health info
+    //     healthInfo.setWeight(160.0);
+    //     doctorPortalDAO.updateHealthInfo(healthInfo);
+        
+    //     // Update med remind
+    //     medRemind.setDosage("400mg");
+    //     doctorPortalDAO.updateMedRemind(medRemind);
+        
+    //     // Delete health info
+    //     doctorPortalDAO.deleteHealthInfo(1);
+        
+    //     // Delete med remind
+    //     doctorPortalDAO.deleteMedRemind(1);
+        
+    //     // Get health info by patient id and date
+    //     List<health_info> healthInfoByPatientIdAndDate = doctorPortalDAO.getHealthInfoByPatientIdAndDate(1, "2021-10-01");
+    //     for (health_info healthInfoItem : healthInfoByPatientIdAndDate) {
+    //         System.out.println(healthInfoItem);
+    //     }
+    // }

@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 public class health_info {
     private int id;
     private int patient_id;
@@ -19,6 +21,10 @@ public class health_info {
         this.steps = steps;
         this.heart_rate = heart_rate;
         this.date = date;
+    }
+
+    public health_info(int i, double d, double e, double f, int j, int k, int l, Date valueOf) {
+        
     }
 
     public int getId() {

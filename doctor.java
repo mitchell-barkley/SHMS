@@ -2,10 +2,8 @@ public class doctor extends user {
     private String medLicenseNum;
     private String specialization;
 
-    public doctor(int id, String firstName, String lastName, String email, String password, boolean isAdmin, String medLicenseNum, String specialization) {
+    public doctor(int id, String firstName, String lastName, String email, String password, boolean isAdmin) {
         super(id, firstName, lastName, email, password, isAdmin);
-        this.medLicenseNum = medLicenseNum;
-        this.specialization = specialization;
     }
 
     public String getMedLicenseNum() {

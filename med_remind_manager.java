@@ -39,4 +39,8 @@ public class med_remind_manager {
         }
         return dueReminders;
     }
+
+    public int getPatient_id() {
+        return 0;
+    }
 }

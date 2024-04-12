@@ -1,3 +1,5 @@
+import java.sql.Date;
+
 public class med_remind {
     private int id;
     private int patient_id;
@@ -15,6 +17,16 @@ public class med_remind {
         this.schedule = schedule;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public med_remind(int i, String string, String string2, Date valueOf, Date valueOf2) {
+        med_remind_manager med_remind_manager = new med_remind_manager();
+        this.id = i;
+        this.patient_id = med_remind_manager.getPatient_id();
+        this.med_name = string;
+        this.dosage = string2;
+        this.startDate = valueOf.toString();
+        this.endDate = valueOf2.toString();
     }
 
     public int getId() {

@@ -1,41 +1,40 @@
 import java.util.List;
 
 public class doctor_portal_DAO {
-    private UserDAO userDAO;
-    private HealthInfoDAO healthInfoDAO;
-    
-    public doctor_portal_DAO() {
-        userDAO = new UserDAO();
-        healthInfoDAO = new HealthInfoDAO();
+    private user_DAO userDAO;
+    private health_info_DAO healthInfoDAO;
+        public doctor_portal_DAO() {
+            userDAO = new user_DAO();
+            healthInfoDAO = new health_info_DAO();
     }
 
-    public Doctor getDoctorById(int doctorId) {
-        User user = userDAO.getUserById(doctorId);
-        Doctor doctor = new Doctor(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.isAdmin(), user.getMedLicenseNum(), user.getSpecialization());
+    public static doctor getDoctorById(int doctorId) {
+        user user = user_DAO.getUserById(doctorId);
+        doctor doctor = new doctor(user.getId(), user.getFirstName(), user.getLastName(), user.getEmail(), user.getPassword(), user.isAdmin());
         return doctor;
     }
 
-    public List<HealthInfo> getHealthInfoByPatientId(int patientId) {
-        return healthInfoDAO.getHealthInfoByPatientId(patientId);
+    public health_info getHealthInfoByPatientId(int patientId) {
+        return healthInfoDAO.getHealthInfoByID(patientId);
     }
 
-    public List<MedRemind> getMedRemindByPatientId(int patientId) {
-        return healthInfoDAO.getMedRemindByPatientId(patientId);
+    public List<med_remind> getMedRemindByPatientId(int patientId) {
+        return healthInfoDAO.getMedRemindById(patientId);
     }
 
-    public void addHealthInfo(HealthInfo healthInfo) {
-        healthInfoDAO.addHealthInfo(healthInfo);
+    public void addHealthInfo(health_info healthInfo) {
+        healthInfoDAO.createHealthInfo(healthInfo);
     }
 
-    public void addMedRemind(MedRemind medRemind) {
+    public void addMedRemind(med_remind medRemind) {
         healthInfoDAO.addMedRemind(medRemind);
     }
 
-    public void updateHealthInfo(HealthInfo healthInfo) {
+    public void updateHealthInfo(health_info healthInfo) {
         healthInfoDAO.updateHealthInfo(healthInfo);
     }
 
-    public void updateMedRemind(MedRemind medRemind) {
+    public void updateMedRemind(med_remind medRemind) {
         healthInfoDAO.updateMedRemind(medRemind);
     }
 
@@ -47,11 +46,7 @@ public class doctor_portal_DAO {
         healthInfoDAO.deleteMedRemind(medRemindId);
     }
 
-    public List<HealthInfo> getHealthInfoByPatientIdAndDate(int patientId, String date) {
+    public List<health_info> getHealthInfoByPatientIdAndDate(int patientId, String date) {
         return healthInfoDAO.getHealthInfoByPatientIdAndDate(patientId, date);
-    }
-
-    public List<MedRemind> getMedRemindByPatientIdAndDate(int patientId, String date) {
-        return healthInfoDAO.getMedRemindByPatientIdAndDate(patientId, date);
     }
 }
