@@ -3,9 +3,25 @@ import java.util.List;
 public class doctor_portal_DAO {
     private user_DAO userDAO;
     private health_info_DAO healthInfoDAO;
-        public doctor_portal_DAO() {
-            userDAO = new user_DAO();
-            healthInfoDAO = new health_info_DAO();
+
+    public doctor_portal_DAO(user_DAO userDAO, health_info_DAO healthInfoDAO) {
+        this.userDAO = userDAO;
+        this.healthInfoDAO = healthInfoDAO;
+    }
+
+    public doctor_portal_DAO(user_DAO userDAO) {
+        this.userDAO = userDAO;
+        this.healthInfoDAO = new health_info_DAO();
+    }
+
+    public doctor_portal_DAO(health_info_DAO healthInfoDAO) {
+        this.userDAO = new user_DAO();
+        this.healthInfoDAO = healthInfoDAO;
+    }
+
+    public doctor_portal_DAO() {
+        userDAO = new user_DAO();
+        healthInfoDAO = new health_info_DAO();
     }
 
     public static doctor getDoctorById(int doctorId) {
