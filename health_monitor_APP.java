@@ -1,10 +1,8 @@
-
 import java.util.List;
 
 public class health_monitor_APP {
     private static doctor_portal_DAO doctorPortalDAO = new doctor_portal_DAO();
     private static user user = new user(1, "John", "Doe", "drjohn@med.com", "drjohn", true);
-
     
     public static void main(String[] args) {
         while (true) {

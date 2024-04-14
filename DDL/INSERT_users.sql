@@ -1,0 +1,10 @@
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Robbyn', 'Wolstenholme', 'rwolstenholme0@who.int', 'tL3=aW=a"3$a@U|', '7/2/2023', true);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Othilie', 'Criple', 'ocriple1@twitpic.com', 'oM9,Rb(ZP{51TEHs', '6/12/2023', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Shannah', 'Cobden', 'scobden2@biblegateway.com', 'aQ7*mBpdcg', '12/25/2023', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Nadine', 'Acory', 'nacory3@uiuc.edu', 'bE8!&$iR', '2/19/2024', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Halette', 'Lunge', 'hlunge4@storify.com', 'uQ5,j.6UY''D', '8/3/2023', true);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Lorinda', 'Litt', 'llitt5@theglobeandmail.com', 'sM7}jW#"r_n_', '2/6/2024', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Kirbie', 'MacFadin', 'kmacfadin6@bloomberg.com', 'nN8!~*xtkjMoBQ', '12/4/2023', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Cicily', 'Phillott', 'cphillott7@cargocollective.com', 'iL7>I=7z4', '1/29/2024', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Merwin', 'Cleal', 'mcleal8@issuu.com', 'mS9&ti47', '6/12/2023', false);
+insert into public.users (first_name, last_name, email, password, created_at, is_admin) values ('Ly', 'Craythorne', 'lcraythorne9@1688.com', 'bH8@Txa*y5<#VVZ', '9/24/2023', false);
