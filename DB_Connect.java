@@ -4,9 +4,9 @@ import java.sql.SQLException;
 
 public class DB_Connect {
 
-    private static final String url = "jdbc:postgresql://localhost:16000/SHMS";
-    private static final String user = "postgres";
-    private static final String password = "ResistanceL16";
+    private static final String url = "";
+    private static final String user = "";
+    private static final String password = "";
 
     public static Connection connect() {
         Connection conn = null;
